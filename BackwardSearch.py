@@ -11,8 +11,8 @@ def backward_search(goal_state, initial_state, actions):
         in_fringe.pop(0)
         explored.append(current_state.hash())
         successors = get_successors(current_state, actions)
-        print(successors)
         for successor in successors:
+            print(successor)
             if initial_test(successor, initial_state):
                 print_solution(successor)
                 return
@@ -25,7 +25,7 @@ def backward_search(goal_state, initial_state, actions):
 def get_successors(state, actions):
     result = []
     for action in actions:
-        if action.is_relevant(state):
+        if action.is_relevant_backward(state):
             successor = State(state, action, state.positive_literals, state.negative_literals)
             action.regress(successor)
             result.append(successor)

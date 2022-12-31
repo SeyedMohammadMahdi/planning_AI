@@ -13,7 +13,7 @@ class State:
         for negative_literal in negative_literals:
             self.negative_literals.append(negative_literal)
 
-    def to_string(self):
+    def __str__(self):
         return f'state, positive literals: {self.positive_literals}, negative literals: {self.negative_literals}'
 
     def hash(self):

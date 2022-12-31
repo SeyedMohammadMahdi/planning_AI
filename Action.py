@@ -1,5 +1,6 @@
 import State
 
+
 class Action:
     def __init__(self, name, positive_preconditions, negative_preconditions, add_list, delete_list):
         self.name = name
@@ -15,9 +16,20 @@ class Action:
             set(set(self.negative_preconditions).union(set(set(state.negative_literals) - set(self.delete_list)))))
         state.positive_literals = positive_literals
         state.negative_literals = negative_literals
-        return state
 
-    def is_relevant(self, state):
+    def progress(self, state):
+        positive_literals = list(set(state.positive_literals).union(set(self.add_list)))
+        for del_element in self.delete_list:
+            if del_element in positive_literals:
+                positive_literals.remove(del_element)
+        negative_literals = list(set(state.negative_literals).union(set(self.delete_list)))
+        for add_element in self.add_list:
+            if add_element in negative_literals:
+                negative_literals.remove(add_element)
+        state.positive_literals = positive_literals
+        state.negative_literals = negative_literals
+
+    def is_relevant_backward(self, state):
         if not self.is_unified(state):
             return False
 
@@ -25,6 +37,12 @@ class Action:
             return False
 
         return True
+
+    def is_relevant_forward(self, state):
+        if set(self.positive_preconditions) <= set(state.positive_literals) and \
+                set(self.negative_preconditions) <= set(state.negative_literals):
+            return True
+        return False
 
     def is_unified(self, state):
         status = 0
