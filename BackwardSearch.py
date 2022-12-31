@@ -12,7 +12,7 @@ def backward_search(goal_state, initial_state, actions):
         explored.append(current_state.hash())
         successors = get_successors(current_state, actions)
         for successor in successors:
-            print(successor)
+            # print(successor)
             if initial_test(successor, initial_state):
                 print_solution(successor)
                 return
