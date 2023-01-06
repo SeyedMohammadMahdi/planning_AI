@@ -9,7 +9,7 @@ def main():
     actions = getActions()
     print("Planning...")
     initial_state = State(None, None, positive_literals=['At(' + 'MONKEY' + ', ' + 'A' + ')', 'At(' + 'BANANA' + ', ' + 'B' + ')',
-                                                         'At(' + 'BOX' + ', ' + 'C' + ')', 'Height(' + 'MONEKY' + ', LOW)',
+                                                         'At(' + 'BOX' + ', ' + 'C' + ')', 'Height(' + 'MONKEY' + ', LOW)',
                                                          'Height(' + 'BOX' + ', LOW)', 'Height(' + 'BANANA' + ', HIGH)',
                                                          'Pushable(' + 'BOX' + ')', 'Climable(' + 'BOX' + ')',
                                                          'Graspable(' + 'BANANA' + ')'],
