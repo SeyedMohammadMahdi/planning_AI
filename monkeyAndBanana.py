@@ -33,7 +33,7 @@ def getActions():
                                                'At(' + object + ', ' + loc + ')',
                                                'Climable(' + object + ')', 'Height(' + object + ', LOW)'],
                        negative_preconditions=[],
-                       add_list=['On(' + 'MONKEY' + ', ' + object, 'Height(' + 'MONKEY' + ', HIGH)'],
+                       add_list=['On(' + 'MONKEY' + ', ' + object + ')', 'Height(' + 'MONKEY' + ', HIGH)'],
                        delete_list=['Height(' + 'MONKEY' + ', LOW)'])
         actions.append(Climb)
 

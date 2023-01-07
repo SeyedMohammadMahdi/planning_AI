@@ -27,7 +27,7 @@ class Action:
             if add_element in negative_literals:
                 negative_literals.remove(add_element)
         state.positive_literals = positive_literals
-        state.negative_literals = negative_literals
+        state.negative_literals = []
 
     def is_relevant_backward(self, state):
         if not self.is_unified(state):

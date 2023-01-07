@@ -12,6 +12,8 @@ def forward_search(goal_state, initial_state, actions):
         explored.append(current_state.hash())
         successors = get_successors(current_state, actions)
         for successor in successors:
+            print(successor) if ('Height(MONKEY, HIGH)' in successor.positive_literals and
+                                 'At(BOX, B)' in successor.positive_literals) else None
             if goal_test(successor, goal_state):
                 print_solution(successor)
                 return
@@ -19,7 +21,6 @@ def forward_search(goal_state, initial_state, actions):
                 if successor.hash() not in in_fringe and successor.hash() not in explored:
                     fringe.append(successor)
                     in_fringe.append(successor.hash())
-
 
 
 def get_successors(state, actions):
