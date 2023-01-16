@@ -2,12 +2,21 @@ from Action import Action
 
 
 def getActions(n):
+
+    # initial_state = State(None, None, positive_literals=['ON(' + 'block1' + ', ' + 'block2' + ')',
+    #                                                      'ON(' + 'block4' + ', ' + 'block1' + ')',
+    #                                                      'ON(' + 'block3' + ', ' + 'block4' + ')',
+    #                                                      'TopMostBlock(' + 'block3' + ')',
+    #                                                      'OnTable('+ 'block2' +')'],
+    #                       negative_literals=['Hand(full)'])
+
+
+
     actions = []
     blocks = []
     holding = ''
     for b in range(n):
         blocks.append('block' + (b+1))
-
 
     for b in blocks:
         for b2 in blocks:
