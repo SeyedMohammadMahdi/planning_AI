@@ -3,7 +3,7 @@ from Action import Action
 
 def getActions():
     actions = []
-    locations = ['A', 'B', 'C']
+    locations = ['A','B','C']
     object = 'BOX'
     height = ['HIGH', 'LOW']
 
@@ -13,7 +13,8 @@ def getActions():
                 Go = Action(name='GO(' + 'MONKEY' + ', ' + loc1 + ', ' + loc2 + ')',
                             positive_preconditions=['At(' + 'MONKEY' + ', ' + loc1 + ')',
                                                     'Height(' + 'MONKEY' + ', LOW)'],
-                            negative_preconditions=[], add_list=['At(' + 'MONKEY' + ', ' + loc2 + ')'],
+                            negative_preconditions=[],
+                            add_list=['At(' + 'MONKEY' + ', ' + loc2 + ')'],
                             delete_list=['At(' + 'MONKEY' + ', ' + loc1 + ')'])
                 actions.append(Go)
 
@@ -24,16 +25,21 @@ def getActions():
                                                       'Pushable(' + object + ')',
                                                       'Height(' + object + ', LOW)'],
                               negative_preconditions=[],
-                              add_list=['At(' + object + ', ' + loc2 + ')', 'At(' + 'MONKEY' + ', ' + loc2 + ')'],
-                              delete_list=['At(' + object + ', ' + loc1 + ')', 'At(' + 'MONKEY' + ', ' + loc1 + ')'])
+                              add_list=['At(' + object + ', ' + loc2 + ')',
+                                        'At(' + 'MONKEY' + ', ' + loc2 + ')'],
+                              delete_list=['At(' + object + ', ' + loc1 + ')',
+                                           'At(' + 'MONKEY' + ', ' + loc1 + ')'])
                 actions.append(Push)
     for loc in locations:
         Climb = Action(name='ClimbUp(' + loc + ', ' + object + ')',
-                       positive_preconditions=['At(' + 'MONKEY' + ', ' + loc + ')', 'Height(' + 'MONKEY' + ', LOW)',
+                       positive_preconditions=['At(' + 'MONKEY' + ', ' + loc + ')',
+                                               'Height(' + 'MONKEY' + ', LOW)',
                                                'At(' + object + ', ' + loc + ')',
-                                               'Climable(' + object + ')', 'Height(' + object + ', LOW)'],
+                                               'Climable(' + object + ')',
+                                               'Height(' + object + ', LOW)'],
                        negative_preconditions=[],
-                       add_list=['On(' + 'MONKEY' + ', ' + object + ')', 'Height(' + 'MONKEY' + ', HIGH)'],
+                       add_list=['On(' + 'MONKEY' + ', ' + object + ')'
+                               , 'Height(' + 'MONKEY' + ', HIGH)'],
                        delete_list=['Height(' + 'MONKEY' + ', LOW)'])
         actions.append(Climb)
 
@@ -42,8 +48,10 @@ def getActions():
                            positive_preconditions=['At(' + 'MONKEY' + ', ' + loc + ')',
                                                    'Height(' + 'MONKEY, ' + h + ')',
                                                    'At(' + 'BANANA, ' + loc + ')',
-                                                   'Graspable(' + 'BANANA' + ')', 'Height(' + 'BANANA, ' + h + ')'],
+                                                   'Graspable(' + 'BANANA' + ')',
+                                                   'Height(' + 'BANANA, ' + h + ')'],
                            negative_preconditions=[], add_list=['Have(' + 'MONKEY, ' + 'BANANA)'],
-                           delete_list=['At(' + 'BANANA, ' + loc + ')', 'Height(' + 'BANANA, ' + h + ')'])
+                           delete_list=['At(' + 'BANANA, ' + loc + ')',
+                                        'Height(' + 'BANANA, ' + h + ')'])
             actions.append(Grasp)
     return actions
