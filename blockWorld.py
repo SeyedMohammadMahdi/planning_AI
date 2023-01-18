@@ -10,8 +10,6 @@ def getActions(n):
     #                                                      'OnTable('+ 'block2' +')'],
     #                       negative_literals=['Hand(full)'])
 
-
-
     actions = []
     blocks = []
     holding = ''
@@ -30,7 +28,7 @@ def getActions(n):
                            'TopMostBlock('+b+')'],
                            delete_list=['On('+b+','+b2+')',
                            'TopMostBlock('+b2+')'])
-    actions.append(PickUpFromStack)
+                actions.append(PickUpFromStack)
 
     for b in blocks:
             PickUpFromTable = Action(name='PickUpFromTable(' + b + ')',
@@ -41,7 +39,7 @@ def getActions(n):
                            'Hold('+b+')'],
                            delete_list=['OnTable('+b+')',
                            'TopMostBlock('+b+')'])
-    actions.append(PickUpFromTable)
+            actions.append(PickUpFromTable)
     
     for b in blocks:
         for b2 in blocks:
@@ -56,7 +54,7 @@ def getActions(n):
                            delete_list=['TopMostBlock('+b2+')',
                            'Hand(Full)',
                            'Hold('+b+')'])
-    actions.append(PutDownUnStack)
+                actions.append(PutDownUnStack)
 
     for b in blocks:
             PutDownOnTable = Action(name='PutDownOnTable(' + b + ')',
@@ -67,6 +65,6 @@ def getActions(n):
                            'TopMostBlock('+b+')'],
                            delete_list=['Hand(full)',
                            'Hold('+b+')'])
-    actions.append(PutDownOnTable)
+            actions.append(PutDownOnTable)
     
     return actions
