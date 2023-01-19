@@ -5,10 +5,10 @@ def getActions():
 
     actions = []
     locations = ['A','B','C']
-    crates = ['c1','c2','c3','c4']
+    crates = ['c1','c2','c3']
     trucks = ['t1','t2']
-    hoists = ['h1','h2']
-    pallets = ['p1','p1','p3']
+    hoists = ['h1','h2','h3']
+    pallets = ['p1','p2','p3','p4']
 
 
     for cr in crates:

@@ -17,7 +17,7 @@ def main():
     goal_state = State(None, None, positive_literals=['Have(' + 'MONKEY, ' + 'BANANA)'], negative_literals=[])
     # actions = [Action("Generic", positive_preconditions=["A", "B"], negative_preconditions=[], add_list=["C"], delete_list=[]), \
     # Action("Generic", positive_preconditions=["B", "C"], negative_preconditions=[], add_list=["D"], delete_list=[])]
-    forward_search(goal_state, initial_state, actions)
+    backward_search(goal_state, initial_state, actions)
 
 
 if __name__ == "__main__":
