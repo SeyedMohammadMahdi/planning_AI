@@ -1,24 +1,18 @@
 from State import State
 from BackwardSearch import backward_search
 from ForwardSearch import forward_search
-from monkeyAndBanana import getActions
+from blockWorld import getActions
 
 
 def main():
     print("Getting the set of all actions...")
-    actions = getActions()
+    actions = getActions(2)
     print("Planning...")
-    initial_state = State(None, None, positive_literals=['ON(' + 'block1' + ', ' + 'block2' + ')',
-                                                         'ON(' + 'block4' + ', ' + 'block1' + ')',
-                                                         'ON(' + 'block3' + ', ' + 'block4' + ')',
-                                                         'TopMostBlock(' + 'block3' + ')',
-                                                         'OnTable('+ 'block2' +')'],
+    initial_state = State(None, None, positive_literals=['ON(' + 'block2' + ',' + 'block1' + ')',
+                                                         'TopMostBlock(' + 'block2' + ')',
+                                                         'OnTable('+ 'block1' +')'],
                           negative_literals=[])
-    goal_state = State(None, None, positive_literals=['ON(' + 'block1' + ', ' + 'block2' + ')',
-                                                      'ON(' + 'block2' + ', ' + 'block3' + ')',
-                                                      'ON(' + 'block3' + ', ' + 'block4' + ')',
-                                                      'TopMostBlock(' + 'block1' + ')',
-                                                      'OnTable('+ 'block4' +')'],
+    goal_state = State(None, None, positive_literals=['OnTable('+ 'block1' +')'],
                           negative_literals=[])
     # actions = [Action("Generic", positive_preconditions=["A", "B"], negative_preconditions=[], add_list=["C"], delete_list=[]), \
     # Action("Generic", positive_preconditions=["B", "C"], negative_preconditions=[], add_list=["D"], delete_list=[])]

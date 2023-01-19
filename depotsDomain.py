@@ -15,7 +15,7 @@ def getActions():
         for ho in hoists:
              for loc in locations:
                 for tr in trucks:
-                    LoadToTruck = Action(name='LoadToTruck(' + cr + ', ' + tr + ', ' + ho + ', ' + loc + ')',
+                    LoadToTruck = Action(name='LoadToTruck(' + cr + ',' + tr + ',' + ho + ',' + loc + ')',
                                 positive_preconditions=['Lifts(' + ho + ',' + cr +')',
                                 'At('+tr +','+loc +')',
                                 'At('+ho +','+loc +')'],
@@ -28,7 +28,7 @@ def getActions():
         for ho in hoists:
              for loc in locations:
                 for tr in trucks:
-                    UnloadFromTruck = Action(name='UnloadFromTruck(' + cr + ', ' + tr + ', ' + ho + ', ' + loc + ')',
+                    UnloadFromTruck = Action(name='UnloadFromTruck(' + cr + ',' + tr + ',' + ho + ',' + loc + ')',
                                 positive_preconditions=['Vacant(' + ho +')',
                                 'At('+tr +','+loc +')',
                                 'At('+ho +','+loc +')',
@@ -41,7 +41,7 @@ def getActions():
     for trucks in trucks:
         for loc1 in locations:
             for loc2 in locations:
-                transport = Action(name='transport(' + tr + ', ' + loc1 + ', ' + loc2 + ')',
+                transport = Action(name='transport(' + tr + ',' + loc1 + ',' + loc2 + ')',
                             positive_preconditions=['At('+tr +','+loc1 +')'],
                             negative_preconditions=[],
                             add_list=['At('+tr +','+loc2 +')'],
@@ -51,7 +51,7 @@ def getActions():
         for pa in pallets:
              for loc in locations:
                 for ho in hoists:
-                    LiftUp = Action(name='LiftUP(' + cr + ', ' + ho + ', ' + pa + ', ' + loc + ')',
+                    LiftUp = Action(name='LiftUP(' + cr + ',' + ho + ',' + pa + ',' + loc + ')',
                                 positive_preconditions=['vacant(' + ho +')',
                                 'Available('+cr+')',
                                 'In('+cr+','+pa+')',
@@ -69,7 +69,7 @@ def getActions():
         for pa in pallets:
              for loc in locations:
                 for ho in hoists:
-                    PutDown = Action(name='PutDown(' + cr + ', ' + ho + ', ' + pa + ', ' + loc + ')',
+                    PutDown = Action(name='PutDown(' + cr + ',' + ho + ',' + pa + ',' + loc + ')',
                                 positive_preconditions=['Available('+pa+')',
                                 'At('+ho +','+loc +')',
                                 'At('+pa +','+loc +')',

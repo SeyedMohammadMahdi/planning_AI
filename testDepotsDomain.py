@@ -1,7 +1,7 @@
 from State import State
 from BackwardSearch import backward_search
 from ForwardSearch import forward_search
-from monkeyAndBanana import getActions
+from depotsDomain import getActions
 
 
 def main():
@@ -36,7 +36,7 @@ def main():
                                                       'In('+'c3'+','+'p4'+')'], negative_literals=[])
     # actions = [Action("Generic", positive_preconditions=["A", "B"], negative_preconditions=[], add_list=["C"], delete_list=[]), \
     # Action("Generic", positive_preconditions=["B", "C"], negative_preconditions=[], add_list=["D"], delete_list=[])]
-    forward_search(goal_state, initial_state, actions)
+    backward_search(goal_state, initial_state, actions)
 
 
 if __name__ == "__main__":
