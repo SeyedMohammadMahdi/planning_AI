@@ -14,7 +14,7 @@ def main():
                                                          'Pushable(' + 'BOX' + ')', 'Climable(' + 'BOX' + ')',
                                                          'Graspable(' + 'BANANA' + ')'],
                           negative_literals=[])
-    goal_state = State(None, None, positive_literals=['Have(' + 'MONKEY, ' + 'BANANA)'], negative_literals=[])
+    goal_state = State(None, None, positive_literals=['At(BOX, B)', 'On(MONKEY, BOX)', 'Height(MONKEY, HIGH)', 'Climable(BOX)', 'Height(BOX, LOW)', 'Pushable(BOX)', 'Graspable(BANANA)', 'At(MONKEY, B)', 'Have(MONKEY, BANANA)'], negative_literals=[])
     # actions = [Action("Generic", positive_preconditions=["A", "B"], negative_preconditions=[], add_list=["C"], delete_list=[]), \
     # Action("Generic", positive_preconditions=["B", "C"], negative_preconditions=[], add_list=["D"], delete_list=[])]
     backward_search(goal_state, initial_state, actions)
