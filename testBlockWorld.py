@@ -8,12 +8,10 @@ def main():
     print("Getting the set of all actions...")
     actions = getActions(2)
     print("Planning...")
-    initial_state = State(None, None, positive_literals=['ON(' + 'block2' + ',' + 'block1' + ')',
-                                                         'TopMostBlock(' + 'block2' + ')',
-                                                         'OnTable('+ 'block1' +')'],
-                          negative_literals=[])
-    goal_state = State(None, None, positive_literals=['OnTable('+ 'block1' +')'],
-                          negative_literals=[])
+    initial_state = State(None, None, positive_literals=["On(a, table)", "On(b, table)", "On(c, a)",
+                                                         "Block(a)", "Block(b)", "Block(c)", "Clear(b)",
+                                                         "Clear(c)", "Clear(table)"], negative_literals=[])
+    goal_state = State(None, None, positive_literals=["On(a, b)", "On(b, c)"], negative_literals=[])
     # actions = [Action("Generic", positive_preconditions=["A", "B"], negative_preconditions=[], add_list=["C"], delete_list=[]), \
     # Action("Generic", positive_preconditions=["B", "C"], negative_preconditions=[], add_list=["D"], delete_list=[])]
     backward_search(goal_state, initial_state, actions)
