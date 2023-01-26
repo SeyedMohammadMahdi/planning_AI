@@ -68,7 +68,7 @@ def getActions(n):
         for i in range(n):
             blocks.append(chr(i + 97))
 
-    print(blocks)
+    # print(blocks)
     for x in blocks:
         for y in blocks:
             for z in blocks:

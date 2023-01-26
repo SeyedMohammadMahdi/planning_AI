@@ -46,8 +46,15 @@ def goal_test(state, goal_state):
 
 
 def print_solution(state):
+    actions = []
     while True:
         if state.action == None or state.parent == None:
             break
-        print(state.action.to_string())
+        # print(state.action.to_string())
+        actions.append(state.action.to_string())
         state = state.parent
+
+    actions = actions[::-1]
+    # print(actions)
+    for action in  actions:
+        print(action)
