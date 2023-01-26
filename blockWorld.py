@@ -62,26 +62,36 @@ def getActions(n):
     #                        'Hold('+b+')'])
     #         actions.append(PutDownOnTable)
     actions = []
-    blocks = ['a', 'b', 'c', 'table']
-    for block in blocks:
-        for block1 in blocks:
-            for block2 in blocks:
-                if block != block1 and block1 != block2 and block != block2:
-                    move = Action(name=f"Move({block}, {block1}, {block2}",
-                                  positive_preconditions=[f"On({block}, {block1})", f"Clear({block})", f"Block({block})", f"Block({block2})"],
-                                  negative_preconditions=[],
-                                  add_list=[f"On({block}, {block2})", f"Clear({block1})"],
-                                  delete_list=[f"On({block}, {block1})", f"Clear({block2})"])
-                    actions.append(move)
+    blocks = []
 
-    for block in blocks:
-        for block1 in blocks:
-            if block != block1:
-                moveToTable = Action(name=f"MoveToTable({block}, {block1})",
-                                     positive_preconditions=[f"On({block}, {block1})", f"Clear({block1})", f"Block({block})", f"Block({block1})"],
-                                     negative_preconditions=[],
-                                     add_list=[f"On({block}, table)", f"Clear({block1})"],
-                                     delete_list=[f"On({block}, {block1})"])
-                actions.append(moveToTable)
+    if n <= 26:
+        for i in range(n):
+            blocks.append(chr(i + 97))
+
+    print(blocks)
+    for x in blocks:
+        for y in blocks:
+            for z in blocks:
+                move = Action(name=f'Move({x}, {y}, {z})',
+                              positive_preconditions=[f'On({x}, {y})', f'Clear({x})', f'Clear({z})'],
+                              negative_preconditions=[],
+                              add_list=[f'On({x}, {z})', f'Clear({y})'],
+                              delete_list=[f'Clear({z})'])
+                actions.append(move)
+    for x in blocks:
+        for y in blocks:
+            moveFromTable = Action(name=f'MoveFromTable({x}, {y})',
+                                   positive_preconditions=[f'On({x}, table)', f'Clear({x})', f'Clear({y})'],
+                                   negative_preconditions=[],
+                                   add_list=[f'On({x}, {y})'],
+                                   delete_list=[f'On({x}, table)', f'Clear({y})'])
+            actions.append(moveFromTable)
+
+            moveToTable = Action(name=f'MoveToTable({x}, {y})',
+                                 positive_preconditions=[f'On({x}, {y})', f"Clear({x})"],
+                                 negative_preconditions=[],
+                                 add_list=[f'On({x}, table)', f'Clear({y})'],
+                                 delete_list=[f'On({x}, {y})'])
+            actions.append(moveToTable)
                 
     return actions

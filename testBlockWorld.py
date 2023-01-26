@@ -6,15 +6,11 @@ from blockWorld import getActions
 
 def main():
     print("Getting the set of all actions...")
-    actions = getActions(2)
+    actions = getActions(3)
     print("Planning...")
-    initial_state = State(None, None, positive_literals=["On(a, table)", "On(b, table)", "On(c, a)",
-                                                         "Block(a)", "Block(b)", "Block(c)", "Clear(b)",
-                                                         "Clear(c)", "Clear(table)"], negative_literals=[])
-    goal_state = State(None, None, positive_literals=["On(a, b)", "On(b, c)"], negative_literals=[])
-    # actions = [Action("Generic", positive_preconditions=["A", "B"], negative_preconditions=[], add_list=["C"], delete_list=[]), \
-    # Action("Generic", positive_preconditions=["B", "C"], negative_preconditions=[], add_list=["D"], delete_list=[])]
-    backward_search(goal_state, initial_state, actions)
+    initial_state = State(None, None, positive_literals=["On(a, table)", "On(b, table)", "On(c, a)", "Clear(b)", "Clear(c)"], negative_literals=[])
+    goal_state = State(None, None, positive_literals=["On(a, b)", "On(b, c)", 'Clear(a)', 'On(c, table)'], negative_literals=[])
+    forward_search(goal_state, initial_state, actions)
 
 
 if __name__ == "__main__":
