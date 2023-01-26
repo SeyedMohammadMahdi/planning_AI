@@ -72,12 +72,13 @@ def getActions(n):
     for x in blocks:
         for y in blocks:
             for z in blocks:
-                move = Action(name=f'Move({x}, {y}, {z})',
-                              positive_preconditions=[f'On({x}, {y})', f'Clear({x})', f'Clear({z})'],
-                              negative_preconditions=[],
-                              add_list=[f'On({x}, {z})', f'Clear({y})'],
-                              delete_list=[f'Clear({z})'])
-                actions.append(move)
+                if x != y and x != z and y != z:
+                    move = Action(name=f'Move({x}, {y}, {z})',
+                                  positive_preconditions=[f'On({x}, {y})', f'Clear({x})', f'Clear({z})'],
+                                  negative_preconditions=[],
+                                  add_list=[f'On({x}, {z})', f'Clear({y})'],
+                                  delete_list=[f'Clear({z})', f'On({x}, {y})'])
+                    actions.append(move)
     for x in blocks:
         for y in blocks:
             moveFromTable = Action(name=f'MoveFromTable({x}, {y})',
