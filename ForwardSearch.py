@@ -9,14 +9,19 @@ def forward_search(goal_state, initial_state, actions):
     explored = []
 
     while fringe:
-        level_list = []
+        # if u want to run heuristic method, uncomment next line:
+        # level_list = []
+        # if u want to run igonore_preconds heuristic method, uncomment next lines:
         # for index in range(len(fringe)):
         #     level_list.append(igonore_preconds(fringe[index], in_fringe[index], actions, goal_state))
+        # if u want to run ignore_del_list heuristic method, uncomment next lines:
         # for index in range(len(fringe)):
         #     level_list.append(ignore_del_list(fringe[index], in_fringe[index], actions, goal_state))
-        x = list(zip(fringe, level_list))
-        x.sort(key=lambda a: a[1])
-        fringe = [y[0] for y in x]
+
+        # if u want to run heuristic method, uncomment next lines:
+        # x = list(zip(fringe, level_list))
+        # x.sort(key=lambda a: a[1])
+        # fringe = [y[0] for y in x]
         current_state = fringe.pop(0)
         in_fringe.pop(0)
         explored.append(current_state.hash())
