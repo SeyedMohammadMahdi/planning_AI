@@ -44,6 +44,18 @@ class Action:
             return True
         return False
 
+    def heuristic_ignore_preconds(self, state):
+        return True
+
+    def heuristic_ignore_del_list(self, state):
+        positive_literals = list(set(state.positive_literals).union(set(self.add_list)))
+        negative_literals = list(set(state.negative_literals))
+        for add_element in self.add_list:
+            if add_element in negative_literals:
+                negative_literals.remove(add_element)
+        state.positive_literals = positive_literals
+        state.negative_literals = []
+
     def is_unified(self, state):
         status = 0
         for add_literal in self.add_list:
