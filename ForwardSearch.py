@@ -12,8 +12,8 @@ def forward_search(goal_state, initial_state, actions):
         level_list = []
         # for index in range(len(fringe)):
         #     level_list.append(igonore_preconds(fringe[index], in_fringe[index], actions, goal_state))
-        for index in range(len(fringe)):
-            level_list.append(ignore_del_list(fringe[index], in_fringe[index], actions, goal_state))
+        # for index in range(len(fringe)):
+        #     level_list.append(ignore_del_list(fringe[index], in_fringe[index], actions, goal_state))
         x = list(zip(fringe, level_list))
         x.sort(key=lambda a: a[1])
         fringe = [y[0] for y in x]
