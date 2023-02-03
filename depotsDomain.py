@@ -4,9 +4,14 @@ from Action import Action
 def getActions():
 
     actions = []
+    # locations = ['A','B','C']
+    # crates = ['c1','c2','c3']
+    # trucks = ['t1','t2']
+    # hoists = ['h1','h2','h3']
+    # pallets = ['p']
     locations = ['A','B','C']
-    crates = ['c1','c2','c3']
-    trucks = ['t1','t2']
+    crates = ['c1']
+    trucks = ['t1']
     hoists = ['h1','h2','h3']
     pallets = ['p']
 
