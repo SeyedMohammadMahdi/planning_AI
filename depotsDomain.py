@@ -8,7 +8,7 @@ def getActions():
     crates = ['c1','c2','c3']
     trucks = ['t1','t2']
     hoists = ['h1','h2','h3']
-    pallets = ['p1','p2','p3','p4']
+    pallets = ['p']
 
     for truck in trucks:
         for l1 in locations:
