@@ -4,47 +4,62 @@ from Action import Action
 def getActions():
 
     actions = []
-    places = ['A','B','C']
+    locations = ['A','B','C']
     crates = ['c1','c2','c3']
     trucks = ['t1','t2']
     hoists = ['h1','h2','h3']
-    surfaces = ['s1','s2','s3','s4']
+    pallets = ['p1','p2','p3','p4']
 
     for truck in trucks:
-        for p1 in places:
-            for p2 in places:
-                if p1 != p2:
-                    drive = Action(name=f'Drive({truck}, {p1}, {p2})',
-                                   positive_preconditions=[f'At({truck}, {p1})'],
-                                   negative_preconditions=[],
-                                   add_list=[f'At({truck}, {p2})'],
-                                   delete_list=[f'At({truck}, {p1})'])
-                    actions.append(drive)
-
-
+        for l1 in locations:
+            for l2 in locations:
+                if l1 != l2:
+                    move = Action(name=f'Move({truck}, {l1}, {l2})',
+                    positive_preconditions=[f'At({truck}, {l1})'],
+                    negative_preconditions=[],
+                    add_list=[f'At({truck}, {l2})'],
+                    delete_list=[f'At({truck}, {l1})'])
+                    actions.append(move)
+    
     for hoist in hoists:
         for crate in crates:
-            for surface in surfaces:
-                for place in places:
-                    lift = Action(name=f'Lift({hoist}, {crate}, {surface}, {place})',
-                                  positive_preconditions=[f'At({hoist}, {place})', f'Available({hoist})',
-                                                          f'At({crate}, {place})', f'On({crate}, {surface})',
-                                                          f'Clear({crate})'],
-                                  negative_preconditions=[],
-                                  add_list=[f'Lifting({hoist}, {crate})', f'Clear({surface})'],
-                                  delete_list=[f'At({crate}, {place}', f'Clear({crate})',
-                                               f'Available({hoist})', f'On({crate}, {surface})'])
+            for pallet in pallets:
+                for location in locations:
+                    lift =Action(name=f'Lifting({hoist}, {crate}, {pallet}, {location})',
+                    positive_preconditions=[f'At({hoist}, {location})', f'At({crate}, {location})', f'On({crate}, {pallet})', f'Available({hoist})'],
+                    negative_preconditions=[],
+                    add_list=[f'Lifting({hoist}, {crate})'],
+                    delete_list=[f'On({crate}, {pallet})', f'Available({hoist})', f'At({crate}, {location})'])
+                
                     actions.append(lift)
 
-                    drop = Action(name=f'Drop({hoist}, {crate}, {surface}, {place})',
-                                  positive_preconditions=[f'At({hoist}, {place}', f'Clear({crate})',
-                                                          f'Lifting({hoist}, {crate})'],
-                                  negative_preconditions=[],
-                                  add_list=[f'Available({hoist})', f'At({crate}, {place})',
-                                            f'Clear({crate})', f'On({crate}, {surface})'],
-                                  delete_list=[f'Lifting({hoist}, {crate})', f'Clear({surface})'])
+                    drop = Action(name=f'Drop({hoist}, {crate}, {pallet}, {location})',
+                    positive_preconditions=[f'Lifting({hoist}, {crate})', f'At({hoist}, {location})'],
+                    negative_preconditions=[],
+                    add_list=[f'On({crate}, {pallet})', f'Available({hoist})', f'At({crate}, {location})'],
+                    delete_list=[f'Lifting({hoist}, {crate})'])
+
                     actions.append(drop)
+    
 
+    for truck in trucks:
+        for hoist in hoists:
+            for crate in crates:
+                for location in locations:
+                    load = Action(name=f'Load({hoist}, {crate}, {truck}, {location})',
+                    positive_preconditions=[f'At({hoist}, {location})', f'At({truck}, {location})', f'Lifting({hoist}, {crate})'],
+                    negative_preconditions=[],
+                    add_list=[f'In({crate}, {truck})', f'Available({hoist})'],
+                    delete_list=[f'Lifting({hoist}, {crate})'])
 
+                    actions.append(load)
+
+                    unload = Action(name=f'Unload({hoist}, {crate}, {truck}, {location})',
+                    positive_preconditions=[f'In({crate}, {truck})', f'Available({hoist})', f'At({truck}, {location})', f'At({hoist}, {location})'],
+                    negative_preconditions=[],
+                    add_list=[f'Lifting({hoist}, {crate})'],
+                    delete_list=[f'In({crate}, {truck})', f'Available({hoist})'])
+                    actions.append(unload)
+    
 
     return actions
