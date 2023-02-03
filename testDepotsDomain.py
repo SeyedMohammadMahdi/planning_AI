@@ -9,10 +9,11 @@ def main():
     actions = getActions()
     print("Planning...")
     initial_state = State(None, None, positive_literals=['At(t1, A)', 'At(h1, A)', 'At(h2, B)', 'At(h3, C)',
-    'At(c1, C)', 'On(c1, p)', 'Available(h1)', 'Available(h2)', 'Available(h3)']
+    'At(c1, A)', 'On(c1, p)', 'Available(h1)', 'Available(h2)', 'Available(h3)']
     , negative_literals=[])
-    goal_state = State(None, None, positive_literals=['At(c1, B)'], negative_literals=[])
-    backward_search(goal_state, initial_state, actions)
+    goal_state = State(None, None, positive_literals=['At(t1, A)', 'At(h1, A)', 'At(h2, B)', 'At(h3, C)',
+    'In(c1, t1)', 'Available(h1)', 'Available(h2)', 'Available(h3)'], negative_literals=[])
+    forward_search(goal_state, initial_state, actions)
 
 
 if __name__ == "__main__":
