@@ -30,8 +30,6 @@ def forward_search(goal_state, initial_state, actions):
         explored.append(current_state.hash())
         successors = get_successors(current_state, actions)
         for successor in successors:
-            # print(successor) if ('Height(MONKEY, HIGH)' in successor.positive_literals and
-            #                      'At(BOX, B)' in successor.positive_literals) else None
             if goal_test(successor, goal_state):
                 print_solution(successor)
                 return
@@ -98,42 +96,38 @@ def print_solution(state):
 
 
 def igonore_preconds(fringe, in_fringe, actions, goal_state):
-    fringe_copy = [copy.deepcopy(fringe)]
+    fringe_copy = {copy.deepcopy(fringe): 0}
     in_fringe_copy = [copy.deepcopy(in_fringe)]
     explored = []
-    level = 0
     while fringe_copy:
-        current_state = fringe_copy.pop(0)
+        current_state = fringe_copy.popitem()
         in_fringe_copy.pop(0)
-        level += 1
-        explored.append(current_state.hash())
-        successors = get_successors2(current_state, actions)
+        explored.append(current_state[0].hash())
+        successors = get_successors2(current_state[0], actions)
         for successor in successors:
             if goal_test(successor, goal_state):
-                return level
+                return current_state[1] + 1
             else:
                 if successor.hash() not in in_fringe_copy and successor.hash() not in explored:
-                    fringe_copy.append(successor)
+                    fringe_copy.update({successor: current_state[1] + 1})
                     in_fringe_copy.append(successor.hash())
     return 1e9
 
 
 def ignore_del_list(fringe, in_fringe, actions, goal_state):
-    fringe_copy = [copy.deepcopy(fringe)]
+    fringe_copy = {copy.deepcopy(fringe): 0}
     in_fringe_copy = [copy.deepcopy(in_fringe)]
     explored = []
-    level = 0
     while fringe_copy:
-        current_state = fringe_copy.pop(0)
+        current_state = fringe_copy.popitem()
         in_fringe_copy.pop(0)
-        level += 1
-        explored.append(current_state.hash())
-        successors = get_successors3(current_state, actions)
+        explored.append(current_state[0].hash())
+        successors = get_successors3(current_state[0], actions)
         for successor in successors:
             if goal_test(successor, goal_state):
-                return level
+                return current_state[1] + 1
             else:
                 if successor.hash() not in in_fringe_copy and successor.hash() not in explored:
-                    fringe_copy.append(successor)
+                    fringe_copy.update({successor: current_state[1] + 1})
                     in_fringe_copy.append(successor.hash())
     return 1e9
