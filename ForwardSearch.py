@@ -80,6 +80,12 @@ def goal_test(state, goal_state):
     return True
 
 
+def goal_test2(state, goal_state):
+    if set(goal_state.positive_literals) <= set(state.positive_literals):
+        return True
+    return False
+
+
 def print_solution(state):
     actions = []
     while True:
@@ -124,7 +130,7 @@ def ignore_del_list(fringe, in_fringe, actions, goal_state):
         explored.append(current_state[0].hash())
         successors = get_successors3(current_state[0], actions)
         for successor in successors:
-            if goal_test(successor, goal_state):
+            if goal_test2(successor, goal_state):
                 return current_state[1] + 1
             else:
                 if successor.hash() not in in_fringe_copy and successor.hash() not in explored:
